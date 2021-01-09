@@ -1,0 +1,11 @@
+name: "Build Debian package: testing"
+outputs:
+  filename:
+    description: "Name of the built `.deb` file"
+  filename-dbgsym:
+    description: "Name of the built `.deb` file for debug symbols"
+
+runs:
+  using: docker
+  image: Dockerfile
+

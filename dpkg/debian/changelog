@@ -1,0 +1,29 @@
+erofs-utils (1.1-2) unstable; urgency=medium
+
+  * Fix pkg-config package dependency reported by buildd.
+
+ -- Gao Xiang <xiang@kernel.org>  Fri, 24 Apr 2020 12:30:00 +0800
+
+erofs-utils (1.1-1) unstable; urgency=medium
+
+  * New upstream release 1.1.
+
+ -- Gao Xiang <xiang@kernel.org>  Thu, 23 Apr 2020 20:37:00 +0800
+
+erofs-utils (1.0-3) unstable; urgency=medium
+
+  * Add more memory allocation failure handling from upstream.
+
+ -- Gao Xiang <xiang@kernel.org>  Sat, 16 Nov 2019 15:15:18 +0800
+
+erofs-utils (1.0-2) unstable; urgency=low
+
+  * Fix debian/copyright description.
+
+ -- Gao Xiang <xiang@kernel.org>  Mon, 11 Nov 2019 07:57:42 +0800
+
+erofs-utils (1.0-1) unstable; urgency=low
+
+  * Initial release. Closes: #943948
+
+ -- Gao Xiang <xiang@kernel.org>  Thu, 31 Oct 2019 21:01:32 +0800

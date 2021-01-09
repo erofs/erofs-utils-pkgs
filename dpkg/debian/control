@@ -1,0 +1,23 @@
+Source: erofs-utils
+Priority: optional
+Maintainer: Gao Xiang <xiang@kernel.org>
+Build-Depends:
+ debhelper (>= 10), liblz4-dev, pkg-config, uuid-dev
+Section: admin
+Standards-Version: 4.5.0
+Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
+
+Package: erofs-utils
+Architecture: linux-any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Utilities for EROFS File System
+ EROFS (Enhanced Read-Only File System) is a lightweight
+ read-only file system with modern designs (eg. page-sized
+ blocks, inline xattrs/data, etc.) for scenarios which need
+ high-performance read-only requirements, e.g. Android OS
+ for smartphones and LIVECDs.
+ .
+ It also provides fixed-sized output compression support,
+ which improves storage density, keeps relatively higher
+ compression ratios, which is more useful to achieve high
+ performance for embedded devices with limited memory.

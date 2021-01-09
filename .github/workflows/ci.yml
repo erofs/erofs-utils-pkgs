@@ -1,0 +1,20 @@
+name: ci
+on: [push]
+jobs:
+  deb-debian-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build packages
+        uses: ./.github/actions/docker-deb-debian-testing
+        with:
+          args : dpkg -uc -us -F
+      - name: Clean up intermediate files
+        run: |
+          sudo rm -rf dpkg
+          sudo rm -rf `find -maxdepth 1 -mindepth 1 -type d | grep '\-[0-9\.]\+$'`
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-deb-debian-testing
+          path: .

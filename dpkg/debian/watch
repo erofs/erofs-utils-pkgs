@@ -1,0 +1,2 @@
+version=3
+https://git.kernel.org/pub/scm/linux/kernel/git/xiang/@PACKAGE@.git/refs/tags .*/snapshot/@PACKAGE@\-(\d\S+)@ARCHIVE_EXT@
