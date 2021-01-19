@@ -2,9 +2,13 @@ Source: erofs-utils
 Priority: optional
 Maintainer: Gao Xiang <xiang@kernel.org>
 Build-Depends:
- debhelper (>= 10), liblz4-dev, pkg-config, uuid-dev
+ debhelper-compat (= 10),
+ pkg-config,
+ liblz4-dev,
+ uuid-dev,
+ libselinux1-dev,
 Section: admin
-Standards-Version: 4.5.0
+Standards-Version: 4.5.1
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 
 Package: erofs-utils

@@ -1,9 +1,21 @@
 #!/usr/bin/make -f
 # You must remove unused comment lines for the released package.
 #export DH_VERBOSE = 1
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 #export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
+
+SKIP_FUSE2FS=yes
+
+COMMON_CONF_FLAGS = --with-uuid --with-selinux \
+	${EXTRA_CONF_FLAGS}
+
+ifneq ($(SKIP_FUSE2FS),)
+COMMON_CONF_FLAGS +=  --disable-fuse
+else
+COMMON_CONF_FLAGS +=  --enable-fuse
+endif
 
 %:
 	dh $@ --with autoreconf
@@ -11,7 +23,8 @@
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		--libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
-		--with-root-libdir=/lib/$(DEB_HOST_MULTIARCH)
+		--with-root-libdir=/lib/$(DEB_HOST_MULTIARCH) \
+		${COMMON_CONF_FLAGS}
 
 override_dh_auto_install:
 	find $(CURDIR) -name "*.la" -delete

@@ -1,0 +1,4 @@
+Bug-Submit: linux-erofs@lists.ozlabs.org
+Documentation: https://www.kernel.org/doc/html/latest/filesystems/erofs.html
+Repository: https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
+Repository-Browse: https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git

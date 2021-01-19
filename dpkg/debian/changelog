@@ -1,3 +1,17 @@
+erofs-utils (1.2.1-2) unstable; urgency=medium
+
+  * Add d/upstream/metadata.
+  * Fix mkfs.erofs that lacks the "bindnow" linker flag.
+  * Need to drop amd64 build for testing migration.
+
+ -- Gao Xiang <xiang@kernel.org>  Wed, 20 Jan 2021 00:00:00 +0800
+
+erofs-utils (1.2.1-1) unstable; urgency=medium
+
+  * New upstream release 1.2.1.
+
+ -- Gao Xiang <xiang@kernel.org>  Tue, 19 Jan 2021 00:00:00 +0800
+
 erofs-utils (1.1-2) unstable; urgency=medium
 
   * Fix pkg-config package dependency reported by buildd.
