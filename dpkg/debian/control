@@ -7,24 +7,13 @@ Build-Depends:
  liblz4-dev,
  uuid-dev,
  libselinux1-dev,
- libfuse-dev <!pkg.erofs-utils.no-erofsfuse>
 Section: admin
 Standards-Version: 4.5.1
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 
-Package: erofsfuse
-Build-Profiles: <!pkg.erofs-utils.no-erofsfuse>
-Priority: optional
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Architecture: linux-any
-Description: erofs file system driver for FUSE
- erofsfuse is a FUSE file system client that supports reading
- from devices or image files containing erofs file systems.
-
 Package: erofs-utils
 Architecture: linux-any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Suggests: erofsfuse
 Description: Utilities for EROFS File System
  EROFS (Enhanced Read-Only File System) is a lightweight
  read-only file system with modern designs (eg. page-sized
