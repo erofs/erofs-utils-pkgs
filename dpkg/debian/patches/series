@@ -1,1 +1,2 @@
-0001-erofs-utils-manpage-only-install-erofsfuse.1-with-th.patch
+0001-erofs-utils-fix-Makefile-for-fsck.erofs-manpage.patch
+0002-erofs-utils-dump-fix-de-nid-issues.patch
