@@ -8,7 +8,7 @@ Build-Depends:
  uuid-dev,
  libselinux1-dev,
 Section: admin
-Standards-Version: 4.5.1
+Standards-Version: 4.6.1
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 
 Package: erofs-utils
