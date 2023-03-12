@@ -1,3 +1,10 @@
+erofs-utils (1.6-1) unstable; urgency=medium
+
+  * New upstream release 1.6.
+  * Enable LZMA compression support.
+
+ -- Gao Xiang <xiang@kernel.org>  Sun, 12 Mar 2023 00:00:00 +0800
+
 erofs-utils (1.5-1) unstable; urgency=medium
 
   * New upstream release 1.5.

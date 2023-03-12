@@ -8,7 +8,7 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
 SKIP_FUSE2FS=yes
 
-COMMON_CONF_FLAGS = --with-uuid --with-selinux \
+COMMON_CONF_FLAGS = --with-uuid --with-selinux --enable-lzma \
 	${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)
