@@ -1,3 +1,12 @@
+erofs-utils (1.6-2) unstable; urgency=medium
+
+  * Backport several fixes to improve fsck.erofs stability.
+  * Backport a fix for fragment feature.
+  * Fix CVE-2023-33551 and CVE-2023-33552 vulnerabilities
+    (closes: #1037092).
+
+ -- Gao Xiang <xiang@kernel.org>  Fri, 09 Jun 2023 00:00:00 +0800
+
 erofs-utils (1.6-1) unstable; urgency=medium
 
   * New upstream release 1.6.

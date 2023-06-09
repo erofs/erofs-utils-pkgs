@@ -1,0 +1,35 @@
+From 8e29e5827709e051e7b4456dfdf038fda69b411d Mon Sep 17 00:00:00 2001
+From: Noboru Asai <asai@sijam.com>
+Date: Fri, 2 Jun 2023 14:20:39 +0900
+Subject: [PATCH 3/5] erofs-utils: limit pclustersize in
+ z_erofs_fixup_deduped_fragment()
+
+The variable 'ctx->pclustersize' could be larger than max pclustersize.
+
+Signed-off-by: Noboru Asai <asai@sijam.com>
+Reviewed-by: Yue Hu <huyue2@coolpad.com>
+Link: https://lore.kernel.org/r/20230602052039.615632-1-asai@sijam.com
+Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+---
+ lib/compress.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/lib/compress.c b/lib/compress.c
+index afa3bf7..19bf196 100644
+--- a/lib/compress.c
++++ b/lib/compress.c
+@@ -359,8 +359,9 @@ static bool z_erofs_fixup_deduped_fragment(struct z_erofs_vle_compress_ctx *ctx,
+ 
+ 	/* try to fix again if it gets larger (should be rare) */
+ 	if (inode->fragment_size < newsize) {
+-		ctx->pclustersize = roundup(newsize - inode->fragment_size,
+-					    EROFS_BLKSIZ);
++		ctx->pclustersize = min(z_erofs_get_max_pclusterblks(inode) * EROFS_BLKSIZ,
++					roundup(newsize - inode->fragment_size,
++						EROFS_BLKSIZ));
+ 		return false;
+ 	}
+ 
+-- 
+2.24.4
+

@@ -1,0 +1,42 @@
+From 7c606be5b110f155ce2dc5f0b3aec53461e612a1 Mon Sep 17 00:00:00 2001
+From: Guo Xuenan <guoxuenan@huawei.com>
+Date: Wed, 31 May 2023 15:26:12 +0800
+Subject: [PATCH 5/5] erofs-utils: fsck: fix segmentfault for crafted image
+ extract
+
+In crafted erofs image, extract files may lead to fsck.erofs
+memory access out of bounds.
+Actually, there is already interception in the code, but which only
+take effect in debug mode, change it to avoid that.
+
+Signed-off-by: Guo Xuenan <guoxuenan@huawei.com>
+Reviewed-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+Fixes: 730979c061d5 ("erofs-utils: fuse: add compressed file support")
+Link: https://lore.kernel.org/r/20230531072612.2643983-3-guoxuenan@huawei.com
+Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+---
+ lib/decompress.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/lib/decompress.c b/lib/decompress.c
+index 36ddd9e..22ba084 100644
+--- a/lib/decompress.c
++++ b/lib/decompress.c
+@@ -138,8 +138,12 @@ int z_erofs_decompress(struct z_erofs_decompress_req *rq)
+ 		if (rq->inputsize > EROFS_BLKSIZ)
+ 			return -EFSCORRUPTED;
+ 
+-		DBG_BUGON(rq->decodedlength > EROFS_BLKSIZ);
+-		DBG_BUGON(rq->decodedlength < rq->decodedskip);
++		if (rq->decodedlength > EROFS_BLKSIZ)
++			return -EFSCORRUPTED;
++
++		if (rq->decodedlength < rq->decodedskip)
++			return -EFSCORRUPTED;
++
+ 		count = rq->decodedlength - rq->decodedskip;
+ 		skip = erofs_blkoff(rq->interlaced_offset + rq->decodedskip);
+ 		rightpart = min(EROFS_BLKSIZ - skip, count);
+-- 
+2.24.4
+
