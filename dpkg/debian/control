@@ -9,6 +9,7 @@ Build-Depends:
  libselinux1-dev,
  pkg-config,
  uuid-dev,
+ libfuse-dev <!pkg.erofs-utils.no-erofsfuse>
 Section: admin
 Standards-Version: 4.6.2
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
@@ -16,6 +17,7 @@ Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 Package: erofs-utils
 Architecture: linux-any
 Depends: ${misc:Depends}, ${shlibs:Depends}
+Suggests: erofsfuse
 Description: Utilities for EROFS File System
  EROFS (Enhanced Read-Only File System) is a lightweight
  read-only file system with modern designs (eg. page-sized
@@ -27,3 +29,22 @@ Description: Utilities for EROFS File System
  which improves storage density, keeps relatively higher
  compression ratios, which is more useful to achieve high
  performance for embedded devices with limited memory.
+
+Package: erofsfuse
+Build-Profiles: <!pkg.erofs-utils.no-erofsfuse>
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Architecture: linux-any
+Description: FUSE Mount Utility for EROFS File System
+ EROFS (Enhanced Read-Only File System) is a lightweight
+ read-only file system with modern designs (eg. page-sized
+ blocks, inline xattrs/data, etc.) for scenarios which need
+ high-performance read-only requirements, e.g. Android OS
+ for smartphones and LIVECDs.
+ .
+ It also provides fixed-sized output compression support,
+ which improves storage density, keeps relatively higher
+ compression ratios, which is more useful to achieve high
+ performance for embedded devices with limited memory.
+ .
+ This package contains a utility to mount EROFS images
+ using FUSE.

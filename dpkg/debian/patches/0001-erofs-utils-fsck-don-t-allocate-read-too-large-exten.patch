@@ -1,7 +1,6 @@
-From 8e099c0185811e6688f41228ff10a7a1bbdccb33 Mon Sep 17 00:00:00 2001
 From: Gao Xiang <hsiangkao@linux.alibaba.com>
 Date: Fri, 2 Jun 2023 11:05:19 +0800
-Subject: [PATCH 1/5] erofs-utils: fsck: don't allocate/read too large extents
+Subject: erofs-utils: fsck: don't allocate/read too large extents
 
 Since some crafted EROFS filesystem images could have insane large
 extents, which causes unexpected bahaviors when extracting data.
@@ -17,6 +16,7 @@ Reported-by: Chaoming Yang <lometsj@live.com>
 Fixes: 412c8f908132 ("erofs-utils: fsck: add --extract=X support to extract to path X")
 Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
 Link: https://lore.kernel.org/r/20230602030519.117071-1-hsiangkao@linux.alibaba.com
+Origin: upstream, https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/commit/?id=2145dff03dd3f3f74bcda3b52160fbad37f7fcfe
 ---
  fsck/main.c | 63 +++++++++++++++++++++++++++++++++++++++++------------
  1 file changed, 49 insertions(+), 14 deletions(-)

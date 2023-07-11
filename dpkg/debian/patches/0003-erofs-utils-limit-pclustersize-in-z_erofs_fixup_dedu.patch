@@ -1,8 +1,6 @@
-From 8e29e5827709e051e7b4456dfdf038fda69b411d Mon Sep 17 00:00:00 2001
 From: Noboru Asai <asai@sijam.com>
 Date: Fri, 2 Jun 2023 14:20:39 +0900
-Subject: [PATCH 3/5] erofs-utils: limit pclustersize in
- z_erofs_fixup_deduped_fragment()
+Subject: erofs-utils: limit pclustersize in z_erofs_fixup_deduped_fragment()
 
 The variable 'ctx->pclustersize' could be larger than max pclustersize.
 
@@ -10,6 +8,7 @@ Signed-off-by: Noboru Asai <asai@sijam.com>
 Reviewed-by: Yue Hu <huyue2@coolpad.com>
 Link: https://lore.kernel.org/r/20230602052039.615632-1-asai@sijam.com
 Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+Origin: upstream, https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/commit/?id=912f53dee67a2f487638bf8caee6ba66f95602bf
 ---
  lib/compress.c | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)

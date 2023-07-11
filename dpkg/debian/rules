@@ -6,7 +6,9 @@
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
+ifneq ($(filter pkg.erofs-utils.no-erofsfuse,$(DEB_BUILD_PROFILES)),)
 SKIP_FUSE2FS=yes
+endif
 
 COMMON_CONF_FLAGS = --with-uuid --with-selinux --enable-lzma \
 	${EXTRA_CONF_FLAGS}

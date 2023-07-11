@@ -1,8 +1,6 @@
-From fd0ecdafce694322c068816df8835d03b5ddbf30 Mon Sep 17 00:00:00 2001
 From: Gao Xiang <hsiangkao@linux.alibaba.com>
 Date: Fri, 2 Jun 2023 13:52:56 +0800
-Subject: [PATCH 2/5] erofs-utils: fsck: block insane long paths when
- extracting images
+Subject: erofs-utils: fsck: block insane long paths when extracting images
 
 Since some crafted EROFS filesystem images could have insane deep
 hierarchy (or may form directory loops) which triggers the
@@ -20,6 +18,7 @@ Fixes: b11f84f593f9 ("erofs-utils: fsck: convert to use erofs_iterate_dir()")
 Fixes: 412c8f908132 ("erofs-utils: fsck: add --extract=X support to extract to path X")
 Signeo-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
 Link: https://lore.kernel.org/r/20230602055256.18061-1-hsiangkao@linux.alibaba.com
+Origin: upstream, https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/commit/?id=27aeef179bf17d5f1d98f827e93d24839a6d4176
 ---
  fsck/main.c | 23 +++++++++++++++--------
  1 file changed, 15 insertions(+), 8 deletions(-)

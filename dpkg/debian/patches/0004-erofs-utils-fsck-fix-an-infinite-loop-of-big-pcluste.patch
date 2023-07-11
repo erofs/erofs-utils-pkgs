@@ -1,7 +1,6 @@
-From 802541dc48f452d490b3df54dd92627d7755203d Mon Sep 17 00:00:00 2001
 From: Gao Xiang <hsiangkao@linux.alibaba.com>
 Date: Thu, 11 May 2023 22:14:13 +0800
-Subject: [PATCH 4/5] erofs-utils: fsck: fix an infinite loop of big pcluster
+Subject: erofs-utils: fsck: fix an infinite loop of big pcluster
 
 Actually it's outdated code compared with kernel
 commit b86269f43892 ("erofs: support parsing big pcluster compact indexes")
@@ -12,6 +11,7 @@ Reported-by: Chaoming Yang <lometsj@live.com>
 Fixes: 418fb683fd96 ("erofs-utils: fuse: support compact indexes for bigpcluster")
 Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
 Link: https://lore.kernel.org/r/20230511141520.32835-1-xiang@kernel.org
+Origin: upstream, https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git/commit/?id=2d0e37b45fe107ca12b1da7738c83a458b0b7735
 ---
  lib/zmap.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
