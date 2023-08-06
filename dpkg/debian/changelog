@@ -1,3 +1,10 @@
+erofs-utils (1.6-4) unstable; urgency=medium
+
+  * Drop redundant `pkg-config` Build-Depends.
+  * Rebuild source-only package for migration to testing.
+
+ -- Gao Xiang <xiang@kernel.org>  Sun, 06 Aug 2023 00:00:00 +0800
+
 erofs-utils (1.6-3) unstable; urgency=medium
 
   * Add erofsfuse binary as package (closes: #1036901).
