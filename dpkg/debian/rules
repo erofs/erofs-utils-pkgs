@@ -11,7 +11,7 @@ SKIP_FUSE2FS=yes
 endif
 
 COMMON_CONF_FLAGS = --with-uuid --with-selinux --enable-lzma \
-	${EXTRA_CONF_FLAGS}
+	--with-zlib --with-libdeflate ${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)
 COMMON_CONF_FLAGS +=  --disable-fuse

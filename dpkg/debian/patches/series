@@ -1,5 +1,0 @@
-0001-erofs-utils-fsck-don-t-allocate-read-too-large-exten.patch
-0002-erofs-utils-fsck-block-insane-long-paths-when-extrac.patch
-0003-erofs-utils-limit-pclustersize-in-z_erofs_fixup_dedu.patch
-0004-erofs-utils-fsck-fix-an-infinite-loop-of-big-pcluste.patch
-0005-erofs-utils-fsck-fix-segmentfault-for-crafted-image-.patch
