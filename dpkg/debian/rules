@@ -10,8 +10,9 @@ ifneq ($(filter pkg.erofs-utils.no-erofsfuse,$(DEB_BUILD_PROFILES)),)
 SKIP_FUSE2FS=yes
 endif
 
-COMMON_CONF_FLAGS = --with-uuid --with-selinux --enable-lzma \
-	--with-zlib --with-libdeflate ${EXTRA_CONF_FLAGS}
+COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading \
+	--with-uuid --with-selinux \
+	--with-zlib --with-libdeflate --with-libzstd ${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)
 COMMON_CONF_FLAGS +=  --disable-fuse

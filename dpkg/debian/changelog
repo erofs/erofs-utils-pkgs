@@ -1,3 +1,11 @@
+erofs-utils (1.8-1) unstable; urgency=medium
+
+  * New upstream release 1.8.
+  * Enable multi-threaded compression.
+  * Enable Zstandard compression support.
+
+ -- Gao Xiang <xiang@kernel.org>  Sat, 10 Aug 2024 00:00:00 +0800
+
 erofs-utils (1.7.1-1) unstable; urgency=medium
 
   * New upstream release 1.7.1.
