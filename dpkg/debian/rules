@@ -1,23 +1,31 @@
 #!/usr/bin/make -f
-# You must remove unused comment lines for the released package.
-#export DH_VERBOSE = 1
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+include /usr/share/dpkg/architecture.mk
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
+
+ifneq ($(DEB_TARGET_ARCH_OS),linux)
+SKIP_FUSE2FS=yes
+SKIP_SELINUX=yes
+endif
 
 ifneq ($(filter pkg.erofs-utils.no-erofsfuse,$(DEB_BUILD_PROFILES)),)
 SKIP_FUSE2FS=yes
 endif
 
-COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading \
-	--with-uuid --with-selinux \
+COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading --with-uuid \
 	--with-zlib --with-libdeflate --with-libzstd ${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)
 COMMON_CONF_FLAGS +=  --disable-fuse
 else
 COMMON_CONF_FLAGS +=  --enable-fuse
+endif
+
+ifneq ($(SKIP_SELINUX),)
+COMMON_CONF_FLAGS +=  --without-selinux
+else
+COMMON_CONF_FLAGS +=  --with-selinux
 endif
 
 %:
