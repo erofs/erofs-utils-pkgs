@@ -48,9 +48,7 @@ Copyright: 2002 Nadia Yvette Chambers, IBM
            2012 Sasha Levin <levinsasha928@gmail.com>
 License: GPL-2
 
-Files: lib/rb_tree.c
-       lib/rb_tree.h
-       lib/sha256.c
+Files: lib/sha256.c
 Copyright: not applicable
 License: public-domain
 
