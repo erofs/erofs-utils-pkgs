@@ -11,7 +11,7 @@ Build-Depends:
  pkgconf,
  uuid-dev,
  zlib1g-dev,
- libfuse-dev [linux-any] <!pkg.erofs-utils.no-erofsfuse>
+ libfuse3-dev [linux-any] <!pkg.erofs-utils.no-erofsfuse>
 Section: admin
 Standards-Version: 4.7.0
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
@@ -33,9 +33,10 @@ Description: Utilities for EROFS File System
  performance for embedded devices with limited memory.
 
 Package: erofsfuse
+Architecture: linux-any
 Build-Profiles: <!pkg.erofs-utils.no-erofsfuse>
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Architecture: linux-any
+Recommends: fuse3
 Description: FUSE Mount Utility for EROFS File System
  EROFS (Enhanced Read-Only File System) is a lightweight
  read-only file system with modern designs (eg. page-sized
