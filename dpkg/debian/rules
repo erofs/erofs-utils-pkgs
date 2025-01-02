@@ -14,7 +14,8 @@ SKIP_FUSE2FS=yes
 endif
 
 COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading --with-uuid \
-	--with-zlib --with-libdeflate --with-libzstd ${EXTRA_CONF_FLAGS}
+	--with-zlib --with-libdeflate --with-libzstd \
+	--with-xxhash ${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)
 COMMON_CONF_FLAGS +=  --disable-fuse

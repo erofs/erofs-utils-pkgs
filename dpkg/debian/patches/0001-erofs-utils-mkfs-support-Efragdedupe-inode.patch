@@ -1,0 +1,102 @@
+From 9ad36d001ae64cabb680f41dcdd35f9ed0f5f6c0 Mon Sep 17 00:00:00 2001
+From: Gao Xiang <hsiangkao@linux.alibaba.com>
+Date: Fri, 3 Jan 2025 10:40:11 +0800
+Subject: [PATCH] erofs-utils: mkfs: support `-Efragdedupe=inode`
+
+If the entire inode can be deduplicated against an existing fragment,
+simply reuse it.
+
+Multi-threading can still be applied for `-Efragdedupe=inode` with
+the current codebase:
+
+Fedora Linux 39 (Workstation Edition) LiveCD results:
+ -zlzma,level=6,dictsize=131072 -C65536 -Eall-fragments
+
+   `-E^fragdedupe`         2,003,587,072 bytes (1880 MiB)
+   `-Efragdedupe=inode`    1,970,577,408 bytes (1911 MiB)
+
+Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+Link: https://lore.kernel.org/r/20250103024011.198163-1-hsiangkao@linux.alibaba.com
+---
+ include/erofs/config.h |  8 +++++++-
+ lib/compress.c         |  9 +++++++--
+ mkfs/main.c            | 13 ++++++++++---
+ 3 files changed, 24 insertions(+), 6 deletions(-)
+
+diff --git a/include/erofs/config.h b/include/erofs/config.h
+index 47e4d00..92c1467 100644
+--- a/include/erofs/config.h
++++ b/include/erofs/config.h
+@@ -33,6 +33,12 @@ enum {
+ 	TIMESTAMP_CLAMPING,
+ };
+ 
++enum {
++	FRAGDEDUPE_FULL,
++	FRAGDEDUPE_INODE,
++	FRAGDEDUPE_OFF,
++};
++
+ #define EROFS_MAX_COMPR_CFGS		64
+ 
+ struct erofs_compr_opts {
+@@ -53,7 +59,7 @@ struct erofs_configure {
+ 	bool c_fragments;
+ 	bool c_all_fragments;
+ 	bool c_dedupe;
+-	bool c_nofragdedupe;
++	char c_fragdedupe;
+ 	bool c_ignore_mtime;
+ 	bool c_showprogress;
+ 	bool c_extra_ea_name_prefixes;
+diff --git a/lib/compress.c b/lib/compress.c
+index 0e8faad..20ab208 100644
+--- a/lib/compress.c
++++ b/lib/compress.c
+@@ -1527,12 +1527,17 @@ void *erofs_begin_compressed_file(struct erofs_inode *inode, int fd, u64 fpos)
+ 	 * parts into the packed inode.
+ 	 */
+ 	if (cfg.c_fragments && !erofs_is_packed_inode(inode) &&
+-	    !cfg.c_nofragdedupe) {
++	    cfg.c_fragdedupe != FRAGDEDUPE_OFF) {
+ 		ret = z_erofs_fragments_dedupe(inode, fd, &ictx->tof_chksum);
+ 		if (ret < 0)
+ 			goto err_free_ictx;
+-	}
+ 
++		if (cfg.c_fragdedupe == FRAGDEDUPE_INODE &&
++		    inode->fragment_size < inode->i_size) {
++			erofs_dbg("Discard the sub-inode tail fragment @ nid %llu", inode->nid);
++			inode->fragment_size = 0;
++		}
++	}
+ 	ictx->inode = inode;
+ 	ictx->fpos = fpos;
+ 	init_list_head(&ictx->extents);
+diff --git a/mkfs/main.c b/mkfs/main.c
+index 3f74fa2..0f6a32b 100644
+--- a/mkfs/main.c
++++ b/mkfs/main.c
+@@ -306,9 +306,16 @@ static int erofs_mkfs_feat_set_dedupe(bool en, const char *val,
+ static int erofs_mkfs_feat_set_fragdedupe(bool en, const char *val,
+ 					  unsigned int vallen)
+ {
+-	if (vallen)
+-		return -EINVAL;
+-	cfg.c_nofragdedupe = !en;
++	if (!en) {
++		if (vallen)
++			return -EINVAL;
++		cfg.c_fragdedupe = FRAGDEDUPE_OFF;
++	} else if (vallen == sizeof("inode") - 1 &&
++		   !memcmp(val, "inode", vallen)) {
++		cfg.c_fragdedupe = FRAGDEDUPE_INODE;
++	} else {
++		cfg.c_fragdedupe = FRAGDEDUPE_FULL;
++	}
+ 	return 0;
+ }
+ 
+-- 
+2.30.2
+
