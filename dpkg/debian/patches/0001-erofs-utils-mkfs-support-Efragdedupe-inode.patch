@@ -12,9 +12,10 @@ the current codebase:
 Fedora Linux 39 (Workstation Edition) LiveCD results:
  -zlzma,level=6,dictsize=131072 -C65536 -Eall-fragments
 
-   `-E^fragdedupe`         2,003,587,072 bytes (1880 MiB)
-   `-Efragdedupe=inode`    1,970,577,408 bytes (1911 MiB)
+   `-E^fragdedupe`         2,003,587,072 bytes (1911 MiB)
+   `-Efragdedupe=inode`    1,970,577,408 bytes (1880 MiB)
 
+Origin: upstream, https://git.kernel.org/xiang/erofs-utils/c/06875b3f2182
 Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
 Link: https://lore.kernel.org/r/20250103024011.198163-1-hsiangkao@linux.alibaba.com
 ---
