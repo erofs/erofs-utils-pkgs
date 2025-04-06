@@ -14,7 +14,7 @@ Build-Depends:
  zlib1g-dev,
  libfuse3-dev [linux-any] <!pkg.erofs-utils.no-erofsfuse>
 Section: admin
-Standards-Version: 4.7.0
+Standards-Version: 4.7.2
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 
 Package: erofs-utils
