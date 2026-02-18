@@ -13,8 +13,9 @@ ifneq ($(filter pkg.erofs-utils.no-erofsfuse,$(DEB_BUILD_PROFILES)),)
 SKIP_FUSE2FS=yes
 endif
 
-COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading --with-uuid \
-	--with-zlib --with-libdeflate --with-libzstd \
+COMMON_CONF_FLAGS = --enable-lzma --enable-multithreading \
+	--enable-oci --enable-s3 \
+	--with-uuid --with-zlib --with-libdeflate --with-libzstd \
 	--with-xxhash ${EXTRA_CONF_FLAGS}
 
 ifneq ($(SKIP_FUSE2FS),)

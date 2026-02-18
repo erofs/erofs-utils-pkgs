@@ -5,7 +5,8 @@ Subject: [PATCH] erofs-utils: manpage: fix installation of `erofsfuse.1`
 
 `erofsfuse.1` may be missing if `man_MANS` is assigned twice.
 
-Link: https://lore.kernel.org/r/20260218131351.46839-1-xiang@kernel.org
+Forwarded: https://lore.kernel.org/r/20260218131351.46839-1-xiang@kernel.org
+Origin: upstream, https://git.kernel.org/xiang/erofs-utils/p/bb4d44033725
 Signed-off-by: Gao Xiang <xiang@kernel.org>
 ---
  man/Makefile.am | 6 ++++--
