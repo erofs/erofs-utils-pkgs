@@ -1,1 +1,3 @@
 0001-erofs-utils-manpage-fix-installation-of-erofsfuse.1.patch
+0002-erofs-utils-lib-fuse-fix-xattr-parsing-in-the-metabo.patch
+0003-erofs-utils-lib-fuse-fix-encoded-extents-handling.patch
