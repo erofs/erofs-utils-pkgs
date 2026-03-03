@@ -41,7 +41,6 @@ License: GPL-2 or Apache-2.0
 
 Files: include/erofs/flex-array.h
        include/erofs/hashmap.h
-       include/erofs/hashtable.h
        lib/hashmap.c
        scripts/*
 Copyright: 2002 Nadia Yvette Chambers, IBM
