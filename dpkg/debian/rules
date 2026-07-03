@@ -7,6 +7,9 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 ifneq ($(DEB_TARGET_ARCH_OS),linux)
 SKIP_FUSE2FS=yes
 SKIP_SELINUX=yes
+SKIP_FANOTIFY=yes
+SKIP_LIBNL3=yes
+SKIP_UBLK=yes
 endif
 
 ifneq ($(filter pkg.erofs-utils.no-erofsfuse,$(DEB_BUILD_PROFILES)),)
@@ -28,6 +31,24 @@ ifneq ($(SKIP_SELINUX),)
 COMMON_CONF_FLAGS +=  --without-selinux
 else
 COMMON_CONF_FLAGS +=  --with-selinux
+endif
+
+ifneq ($(SKIP_FANOTIFY),)
+COMMON_CONF_FLAGS +=  --disable-fanotify
+else
+COMMON_CONF_FLAGS +=  --enable-fanotify
+endif
+
+ifneq ($(SKIP_LIBNL3),)
+COMMON_CONF_FLAGS +=  --without-libnl3
+else
+COMMON_CONF_FLAGS +=  --with-libnl3
+endif
+
+ifneq ($(SKIP_UBLK),)
+COMMON_CONF_FLAGS +=  --disable-ublk
+else
+COMMON_CONF_FLAGS +=  --enable-ublk
 endif
 
 %:

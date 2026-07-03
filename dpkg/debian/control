@@ -8,8 +8,11 @@ Build-Depends:
  libjson-c-dev,
  liblz4-dev,
  liblzma-dev,
+ libnl-3-dev [linux-any],
+ libnl-genl-3-dev [linux-any],
  libselinux-dev [linux-any],
  libssl-dev,
+ liburing-dev [linux-any],
  libxml2-dev,
  libxxhash-dev,
  libzstd-dev,
@@ -18,7 +21,7 @@ Build-Depends:
  zlib1g-dev,
  libfuse3-dev [linux-any] <!pkg.erofs-utils.no-erofsfuse>
 Section: admin
-Standards-Version: 4.7.2
+Standards-Version: 4.7.4
 Homepage: http://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
 
 Package: erofs-utils
